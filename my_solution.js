@@ -4,38 +4,33 @@ class ListNode {
         this.next = next
     }
 }
+ /*
 
-// 0 -> 1 -> 2 -> 3
-//                f
-//           s
+13    1    5    3    7    10
+                            f
+s
 
-// k = 1 => 2
+ */
 
-//fast and slow nodes
-// move fast k times
-// move fast and slow until fast is at end
-// return slow
-
-
-const kthFromEnd = (head, k) => {
-  let fast = head
-  let slow = head
-  
-  // let count = 0
-  while(k){    
-    k--;    
-    if (!fast){
-      return null
-    }      
-    fast = fast.next
-  }
-  
-  while(fast){
-    fast = fast.next
-    slow = slow.next
-  }
-  
-  return slow.value     
+function findKthFromLast(head, k) {
+    if(!head) return null
+    if(!k) return null
+    if(!head && k > 0) return null
+    
+    let fast = head
+    let slow = head
+    
+    for(let i = 0; i < k - 1; i++){
+        fast = fast.next
+        if(!fast) return -1
+    }
+    
+    while(fast.next){
+        slow = slow.next
+        fast = fast.next
+    }    
+    
+    return slow.value ? slow.value : -1
 }
 
 // Test Cases
